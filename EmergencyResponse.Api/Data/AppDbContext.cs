@@ -10,5 +10,6 @@ namespace EmergencyResponse.Api.Data
         }
 
         public DbSet<Incident> Incidents { get; set; }
+        public DbSet<Unit> Units { get; set; }
     }
 }
