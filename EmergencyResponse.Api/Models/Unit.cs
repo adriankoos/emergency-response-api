@@ -6,6 +6,7 @@
         public string Name { get; set; } = string.Empty;
         public UnitType Type { get; set; }
         public UnitStatus Status { get; set; } = UnitStatus.Available;
+        public List<IncidentUnit> IncidentUnits { get; set; } = new();
     }
 
     public enum UnitType

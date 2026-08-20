@@ -9,6 +9,7 @@
         public IncidentStatus Status { get; set; } = IncidentStatus.Reported;
         public UrgencyLevel Urgency { get; set; } = UrgencyLevel.Medium;
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+        public List<IncidentUnit> IncidentUnits { get; set; } = new();
     }
 
     public enum IncidentStatus

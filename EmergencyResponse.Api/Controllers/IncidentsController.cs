@@ -77,5 +77,39 @@ namespace EmergencyResponse.Api.Controllers
 
             return NoContent();
         }
+        // POST: api/incidents/5/assign-unit
+        [HttpPost("{id}/assign-unit")]
+        public async Task<IActionResult> AssignUnit(int id, [FromBody] AssignUnitRequest request)
+        {
+            var incident = await _context.Incidents.FindAsync(id);
+            if (incident == null)
+            {
+                return NotFound("Incident not found.");
+            }
+
+            var unit = await _context.Units.FindAsync(request.UnitId);
+            if (unit == null)
+            {
+                return NotFound("Unit not found.");
+            }
+
+            var incidentUnit = new IncidentUnit
+            {
+                IncidentId = id,
+                UnitId = request.UnitId
+            };
+
+            _context.IncidentUnits.Add(incidentUnit);
+
+            unit.Status = UnitStatus.Busy;
+
+            await _context.SaveChangesAsync();
+
+            return Ok(incidentUnit);
+        }
+    }
+    public class AssignUnitRequest
+    {
+        public int UnitId { get; set; }
     }
 }
