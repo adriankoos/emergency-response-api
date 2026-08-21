@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using EmergencyResponse.Api.Data;
 using EmergencyResponse.Api.Models;
+using EmergencyResponse.Api.Services;
 
 namespace EmergencyResponse.Api.Controllers
 {
@@ -10,10 +11,12 @@ namespace EmergencyResponse.Api.Controllers
     public class IncidentsController : ControllerBase
     {
         private readonly AppDbContext _context;
+        private readonly GeminiService _geminiService;
 
-        public IncidentsController(AppDbContext context)
+        public IncidentsController(AppDbContext context, GeminiService geminiService)
         {
             _context = context;
+            _geminiService = geminiService;
         }
 
         // GET: api/incidents
@@ -107,9 +110,27 @@ namespace EmergencyResponse.Api.Controllers
 
             return Ok(incidentUnit);
         }
+        // POST: api/incidents/analyze
+        [HttpPost("analyze")]
+        public async Task<IActionResult> AnalyzeIncident([FromBody] AnalyzeRequest request)
+        {
+            if (string.IsNullOrWhiteSpace(request.RawText))
+            {
+                return BadRequest("Text is required.");
+            }
+
+            var aiResponse = await _geminiService.AnalyzeIncidentTextAsync(request.RawText);
+
+            return Ok(new { rawAiResponse = aiResponse });
+        }
     }
     public class AssignUnitRequest
     {
         public int UnitId { get; set; }
+    }
+
+    public class AnalyzeRequest
+    {
+        public string RawText { get; set; } = string.Empty;
     }
 }
