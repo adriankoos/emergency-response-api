@@ -5,6 +5,8 @@ VisualStudioVersion = 17.7.34221.43
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmergencyResponse.Api", "EmergencyResponse.Api.csproj", "{B0358CE7-D29D-4CA8-9DD0-A316034AD61E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmergencyResponse.Web", "..\EmergencyResponse.Web\EmergencyResponse.Web.csproj", "{467773B9-E9E4-47BA-9C22-F84670C3B8DE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{B0358CE7-D29D-4CA8-9DD0-A316034AD61E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B0358CE7-D29D-4CA8-9DD0-A316034AD61E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B0358CE7-D29D-4CA8-9DD0-A316034AD61E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{467773B9-E9E4-47BA-9C22-F84670C3B8DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{467773B9-E9E4-47BA-9C22-F84670C3B8DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{467773B9-E9E4-47BA-9C22-F84670C3B8DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{467773B9-E9E4-47BA-9C22-F84670C3B8DE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

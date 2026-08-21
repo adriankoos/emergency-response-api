@@ -1,0 +1,54 @@
+﻿@page "/"
+@using EmergencyResponse.Web.Models
+@inject IHttpClientFactory HttpClientFactory
+
+<PageTitle>Emergency Response - Incidenty</PageTitle>
+
+<h1>Zoznam incidentov</h1>
+
+@if (incidents == null)
+{
+        <p><em>Načítavam...</em></p>
+}
+else if (!incidents.Any())
+{
+        <p>Zatiaľ žiadne incidenty.</p>
+}
+else
+{
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Typ</th>
+                    <th>Popis</th>
+                    <th>Lokalita</th>
+                    <th>Status</th>
+                    <th>Urgentnosť</th>
+                </tr>
+            </thead>
+            <tbody>
+            @foreach (var incident in incidents)
+            {
+                        <tr>
+                            <td>@incident.Id</td>
+                            <td>@incident.Type</td>
+                            <td>@incident.Description</td>
+                            <td>@incident.Location</td>
+                            <td>@incident.Status</td>
+                            <td>@incident.Urgency</td>
+                        </tr>
+            }
+            </tbody>
+        </table>
+}
+
+@code {
+    private List<Incident>? incidents;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var client = HttpClientFactory.CreateClient("EmergencyResponseApi");
+        incidents = await client.GetFromJsonAsync<List<Incident>>("api/incidents");
+    }
+}
